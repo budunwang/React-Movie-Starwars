@@ -19,8 +19,8 @@ class MovieList extends React.Component {
 
     this.props.movies.forEach((item, i) => {
       movies.push(
-        <div class="container">
-          <div class="col-sm-6 col-md-5">
+        <div className="container">
+          <div className="col-sm-6 col-md-5">
             <li>
               <label onClick={this.handleClick.bind(null, i)} key={i}>{item}</label>
             </li>
@@ -30,8 +30,8 @@ class MovieList extends React.Component {
     })
 
     return (
-      <div class="container">
-        <div class="col-sm-12 col-md-10">
+      <div className="container">
+        <div className="col-sm-12 col-md-10">
           <h2>Movies</h2>
           <ul>
             {movies}

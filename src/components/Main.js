@@ -18,11 +18,12 @@ class AppComponent extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillMount() {
+  // load Movie lists
+  componentDidMount() {
     this.getMovieLists();
   }
 
-  // display the movie list
+  // get movie list
   getMovieLists() {
     const movieLists = [];
     let url = 'http://swapi.co/api/films/';
@@ -37,6 +38,7 @@ class AppComponent extends React.Component {
       .then(function (data) {
         for (let i = 0; i < data.results.length; i++) {
           movieLists.push(data.results[i].title);
+          // get all movies and store in states
           if (i == data.results.length - 1) {
             that.setState({
               MovieLists: movieLists
@@ -50,7 +52,6 @@ class AppComponent extends React.Component {
   getCharacterLists(id) {
     let that = this;
     let url = 'http://swapi.co/api/films/' + id;
-
     fetch(url)
       .then(function (response) {
         if (response.status >= 400) {
@@ -79,7 +80,6 @@ class AppComponent extends React.Component {
             });
         }
       });
-    console.log(this.state.Characters);
   }
 
   // movie click handle
@@ -91,10 +91,9 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    console.log(this.state.MovieLists);
     return (
-      <div class="container">
-        <div class="center-block">
+      <div className="container">
+        <div className="center-block">
           <h1>StarWar</h1>
           <hr/>
           <MovieList movies={this.state.MovieLists} onCheck={this.handleClick}/>

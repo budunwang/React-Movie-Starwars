@@ -19,8 +19,8 @@ class CharLists extends React.Component {
 
     this.props.charas.forEach((item, i) => {
       charas.push(
-        <div class="container">
-          <div class="col-sm-6 col-md-5">
+        <div className="container">
+          <div className="col-sm-6 col-md-5">
             <li>
               <label key={i}>{item}</label>
             </li>
@@ -30,8 +30,8 @@ class CharLists extends React.Component {
     })
 
     return (
-      <div class="container">
-        <div class="col-sm-12 col-md-10">
+      <div className="container">
+        <div className="col-sm-12 col-md-10">
           <h2>Characters</h2>
           <ul>
             {charas}
