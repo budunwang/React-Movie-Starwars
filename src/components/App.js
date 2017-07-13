@@ -1,20 +1,16 @@
-require('normalize.css/normalize.css');
-require('styles/App.css');
-require('isomorphic-fetch');
-require('es6-promise').polyfill();
-
-import React from 'react';
-import CharList from "./CharList";
+import React, {Component} from 'react';
+import fetch from 'isomorphic-fetch';
+import CharList from './CharList';
 import MovieList from './MovieList';
 
-class AppComponent extends React.Component {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
       MovieLists: [],
       Characters: [],
       SelectedMovieId: 0
-    }
+    };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -39,7 +35,7 @@ class AppComponent extends React.Component {
         for (let i = 0; i < data.results.length; i++) {
           movieLists.push(data.results[i].title);
           // get all movies and store in states
-          if (i == data.results.length - 1) {
+          if (i === data.results.length - 1) {
             that.setState({
               MovieLists: movieLists
             });
@@ -72,9 +68,10 @@ class AppComponent extends React.Component {
             })
             .then(function (data) {
               characters.push(data.name);
-              if (i == charUrls.length - 1) {
+              if (i === charUrls.length - 1) {
                 that.setState({
-                  Characters: characters
+                  Characters: characters,
+                  SelectedMovieId: id
                 });
               }
             });
@@ -85,9 +82,6 @@ class AppComponent extends React.Component {
   // movie click handle
   handleClick(id) {
     this.getCharacterLists(id);
-    this.setState({
-      SelectedMovieId: id
-    });
   }
 
   render() {
@@ -98,10 +92,9 @@ class AppComponent extends React.Component {
           <hr/>
           <MovieList movies={this.state.MovieLists} onCheck={this.handleClick}/>
           <hr />
-          <CharList movieId={this.state.SelectedMovieId} charas={this.state.Characters}/>
+          <CharList charas={this.state.Characters}/>
         </div>
       </div>
     );
   }
 }
-export default AppComponent;

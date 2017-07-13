@@ -1,9 +1,6 @@
-require('normalize.css/normalize.css');
-require('styles/App.css');
+import React, {Component} from 'react';
 
-import React from 'react';
-
-class MovieList extends React.Component {
+export default class MovieList extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -19,15 +16,13 @@ class MovieList extends React.Component {
 
     this.props.movies.forEach((item, i) => {
       movies.push(
-        <div className="container">
-          <div className="col-sm-6 col-md-5">
-            <li>
-              <label onClick={this.handleClick.bind(null, i)} key={i}>{item}</label>
-            </li>
-          </div>
+        <div className="col-sm-6 col-md-5" key={i}>
+          <li>
+            <label onClick={this.handleClick.bind(null, i)}>{item}</label>
+          </li>
         </div>
       )
-    })
+    });
 
     return (
       <div className="container">
@@ -41,4 +36,3 @@ class MovieList extends React.Component {
     );
   }
 }
-export default MovieList;
